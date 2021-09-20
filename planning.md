@@ -18,7 +18,13 @@
   - [x] Divide and conquer the exercise.
   - [x] Read the test code.
   - [x] Take Breaks 🥰
+- [x]  get workspaces set up
+  - [x] share github fork
+  - [x] enable livesharing extension (VSCode does not like open source :()
+  - [x] reinstall Live Server
+  - [x] enable auto authentication with GitHub for livesharing
+  - [] get ESLint set up on both computers
 - [ ] TODO prompt from sprint...
-  - [ ] Sub TODO  
+  - [ ] Sub TODO
   - [ ] input...
-  - [ ] output...
+    - [ ] output...
