@@ -5,11 +5,15 @@
 
 // parseJSON('null')
 // parseJSON('[null]')
+var debugg;
 var parseJSON = function(json) {
-  console.log(">>>>>", json);
+  debugg = json;
   var position = 0;
   var scan = function() {
-    console.log(json.substring(position));
+    while (' \n'.indexOf(json[position]) !== -1) {
+      position++;
+    }
+    // console.log(json.substring(position));
     var initValue = json[position];
     position++;
 
@@ -24,7 +28,7 @@ var parseJSON = function(json) {
         }
         var element = scan();
         output.push(element);
-        while (json[position] === ',' || json[position] === ' ') {
+        while (position < json.length && (json[position] === ',' || json[position] === ' ')) {
           position++;
         }
       }
@@ -37,64 +41,77 @@ var parseJSON = function(json) {
       // console.log("object");
       while (position < json.length){
         if (json[position] === '}') {
-          console.log("debug1");
+          // console.log("debug1");
           console.log(json[position]);
           position++;
           return output;
         }
 
-        if (json[position] !== '"') {
-          throw new SyntaxError('expected a string');
-        }
-
         var fieldName = scan();
 
-        while (json[position] === ':' || json[position] === ' ') {
+        while (position < json.length && ': \n'.indexOf(json[position]) !== -1) {
           position++;
         }
 
         output[fieldName] = scan();
 
-        while (json[position] === ',' || json[position] === ' ') {
+        while (position < json.length && ', \n'.indexOf(json[position]) !== -1) {
           position++;
         }
-
       }
+      throw new SyntaxError('unterminated object');
 
 
 
-    }
-    else if(initValue >= '0' && initValue <= '9'){
+    } // "[\"\\\\\\\"\\\"a\\\"\"]" > Array ["\""a""]
+    // parseJSON('"\""') >>> unexpected string in JSON at position 2
+
+
+  // >> ["\""a""]
+    else if(initValue === '-' || initValue >= '0' && initValue <= '9'){
       var startOfNumber = position - 1;
-      while (json[position] >= '0' && json[position] <= '9') {
+      while (position < json.length && (json[position] === '.' || json[position] >= '0' && json[position] <= '9')) {
         position++;
       }
       return Number(json.slice(startOfNumber, position));
     }
 
-    else if(initValue === '\"') {
+    else if(initValue === '"') {
       var startOfString = position;
-      while(json[position] !== "\""){
+      var wasEscaped = false;
+
+      var output = '';
+      while (position < json.length) {
+        if (json[position] === '\\') {
+          position++;
+        } else if(json[position] === '"') {
+          position++;
+          return output;
+        }
+        output += json[position];
         position++;
       }
-      position++;
-      return json.substring(startOfString, position - 1);
+      throw new SyntaxError("unterminated string");
     }
 
-    else if (json.substring(position, position+6).toLowerCase() === "false" ) {
-      position += 5;
+    else if (json.substring(position - 1, position+4).toLowerCase() === "false" ) {
+      position += 4;
       return false;
     }
-    else if (json.substring(position, position+5).toLowerCase() === "true" ) {
-      position += 4;
+    else if (json.substring(position - 1, position+3).toLowerCase() === "true" ) {
+      position += 3;
       return true;
     }
-    else if (json.substring(position, position+5).toLowerCase() === "null" ) {
-      position += 4;
+    else if (json.substring(position - 1, position+3).toLowerCase() === "null" ) {
+      position += 3;
       return null;
+    }
+    else {
+      console.log("Help! Something went wrong!", json.substring(position));
     }
   }
 
   return scan(json);
 
 };
+
