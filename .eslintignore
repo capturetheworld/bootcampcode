@@ -2,6 +2,11 @@
 **/node_modules
 **/bower_components
 **/lib
+<<<<<<< HEAD
 **/jasmine
 **/*.min.js
 **/runner.js
+=======
+**/vendor
+**/*.min.js
+>>>>>>> dcb86010d2b489618ec2072c669ac2a6e9ca72a5

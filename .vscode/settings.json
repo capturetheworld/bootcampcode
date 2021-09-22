@@ -4,7 +4,11 @@
   "editor.renderWhitespace": "all",
   "editor.snippetSuggestions": "none",
   "editor.tabSize": 2,
+<<<<<<< HEAD
   "editor.wordWrap": "off",
+=======
+  "editor.wordWrap": "on",
+>>>>>>> dcb86010d2b489618ec2072c669ac2a6e9ca72a5
   "emmet.showExpandedAbbreviation": "never",
   "files.trimTrailingWhitespace": true,
   "javascript.suggest.enabled": false,
