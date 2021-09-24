@@ -1,0 +1,19 @@
+{
+  "name": "hr-rfp56-self-assessment-week-00-v4r",
+  "version": "1.0.0",
+  "description": "## Guidelines",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capturetheworld/hr-rfp56-self-assessment-week-00-v4r.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/capturetheworld/hr-rfp56-self-assessment-week-00-v4r/issues"
+  },
+  "homepage": "https://github.com/capturetheworld/hr-rfp56-self-assessment-week-00-v4r#readme"
+}
